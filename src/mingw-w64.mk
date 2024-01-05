@@ -4,20 +4,13 @@ PKG             := mingw-w64
 $(PKG)_WEBSITE  := https://mingw-w64.sourceforge.io/
 $(PKG)_DESCR    := MinGW-w64 Runtime
 $(PKG)_IGNORE   :=
-$(PKG)_VERSION  := 11.0.1
-$(PKG)_CHECKSUM := 3f66bce069ee8bed7439a1a13da7cb91a5e67ea6170f21317ac7f5794625ee10
-$(PKG)_SUBDIR   := $(PKG)-v$($(PKG)_VERSION)
-$(PKG)_FILE     := $(PKG)-v$($(PKG)_VERSION).tar.bz2
-$(PKG)_URL      := https://$(SOURCEFORGE_MIRROR)/project/$(PKG)/$(PKG)/$(PKG)-release/$($(PKG)_FILE)
+$(PKG)_VERSION  := master-dddccbc
+$(PKG)_CHECKSUM := 16566222dd95c84f3d7e666229a91c3fbe8cae4bdb8819c8bdcfccfbb63601cc
+$(PKG)_SUBDIR   := $(PKG)-master
+$(PKG)_FILE     := $(PKG)-$($(PKG)_VERSION).tar.bz2
+$(PKG)_URL      := http://obeny.obeny.net/mxe/$($(PKG)_FILE)
 $(PKG)_TYPE     := script
 $(PKG)_DEPS     :=
-
-define $(PKG)_UPDATE
-    $(WGET) -q -O- 'https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/' | \
-    $(SED) -n 's,.*mingw-w64-v\([0-9.]*\)\.tar.*,\1,p' | \
-    $(SORT) -V | \
-    tail -1
-endef
 
 # can't install headers here since dummy pthreads headers are installed
 # and then clobbered by inline winpthreads build in gcc (see #958)

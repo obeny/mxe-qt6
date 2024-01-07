@@ -4,22 +4,13 @@ PKG             := gcc
 $(PKG)_WEBSITE  := https://gcc.gnu.org/
 $(PKG)_DESCR    := GCC
 $(PKG)_IGNORE   :=
-$(PKG)_VERSION  := 13.2.0
-$(PKG)_RELEASE  := $($(PKG)_VERSION)
-$(PKG)_CHECKSUM := e275e76442a6067341a27f04c5c6b83d8613144004c0413528863dc6b5c743da
+$(PKG)_VERSION  := 13-20240106
+$(PKG)_RELEASE  := 13.2.1
+$(PKG)_CHECKSUM := cfd734f741cd3f6049ade535a326e792c950a5662cb601fa3bb10e77594e1053
 $(PKG)_SUBDIR   := gcc-$($(PKG)_VERSION)
 $(PKG)_FILE     := gcc-$($(PKG)_VERSION).tar.xz
-$(PKG)_URL      := https://ftp.gnu.org/gnu/gcc/gcc-$($(PKG)_VERSION)/$($(PKG)_FILE)
-$(PKG)_URL_2    := https://www.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-$($(PKG)_VERSION)/$($(PKG)_FILE)
+$(PKG)_URL      := https://gcc.gnu.org/ftp/gcc/snapshots/$($(PKG)_VERSION)/$($(PKG)_FILE)
 $(PKG)_DEPS     := binutils mingw-w64 $(addprefix $(BUILD)~,gmp isl mpc mpfr)
-
-define $(PKG)_UPDATE
-    $(WGET) -q -O- 'https://ftp.gnu.org/gnu/gcc/?C=M;O=D' | \
-    grep -v 'gcc-6\|gcc-7' | \
-    $(SED) -n 's,.*<a href="gcc-\([0-9][^"]*\)/".*,\1,p' | \
-    $(SORT) -V | \
-    tail -1
-endef
 
 define $(PKG)_CONFIGURE
     # configure gcc

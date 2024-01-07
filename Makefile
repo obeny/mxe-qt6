@@ -50,7 +50,6 @@ WGET_TOOL   = wget
 WGET        = $(WGET_TOOL) --user-agent='$(or $($(1)_UA),$(DEFAULT_UA))' -t 2 --timeout=6
 
 REQUIREMENTS := \
-    7za \
     autoconf \
     automake \
     autopoint \
@@ -73,7 +72,6 @@ REQUIREMENTS := \
     perl \
     $(PYTHON) \
     $(PYTHON3) \
-    ruby \
     $(SED) \
     $(SORT) \
     unzip \
